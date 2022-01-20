@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="div_cars">
+  <form action="{% url 'car_rental:index' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Rezerwuj</button>
+  </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p>{{ car.car_brand }}</p>
+  <p>{{ car.car_model }}</p>
+  <p>{{ car.car_seats }}</p>
+    <a href="{% url 'car_rental:index' %}">Home Page</a>
+{% endblock %}
