@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% for car in cars %}
-  <div class="div_cars">
-  <p>Marka: {{ car.car_brand }}</p>
-  <p>Model: {{ car.car_model }}</p>
-  <p>Ilość miejsc: {{ car.car_seats }}</p>
-  <p>
-    <a href="{% url 'car_rental:car_detail' car.id %}">Szczegóły</a>
-  </p>
-  </div>
-  {% endfor %}
+<p>Tutaj powinno być reservation.id {{ reservation.id }}</p>
+{% for available_car in available_cars %}
+<p>{{ available_car }}</p>
+{% endfor %}
 {% endblock %}
 

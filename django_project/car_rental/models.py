@@ -36,6 +36,18 @@ class Reservation(models.Model):
         verbose_name_plural = 'Reservations'
 
 
+class Booking(models.Model):
+    booked_car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    # dodać booked_by_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    booking_from = models.DateField()
+    booking_to = models.DateField()
+
+    def __str__(self):
+        return f'Zamówienie nr: {self.id}'
+
+    class Meta:
+        verbose_name = 'Booking'
+        verbose_name_plural = 'Bookings'
 
 
 

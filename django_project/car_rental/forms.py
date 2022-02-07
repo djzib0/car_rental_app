@@ -10,8 +10,8 @@ from django.contrib.admin.widgets import AdminDateWidget
 class ReservationForm(forms.Form):
     today = datetime.date.today()
     model = Reservation
-    reservation_from = forms.DateField(widget=forms.SelectDateWidget)
-    reservation_to = forms.DateField(widget=forms.SelectDateWidget)
+    reservation_from = forms.DateField(widget=forms.SelectDateWidget, initial=today)
+    reservation_to = forms.DateField(widget=forms.SelectDateWidget, initial=today)
     labels = ['text']
 
     def clean(self):
