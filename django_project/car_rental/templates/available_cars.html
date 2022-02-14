@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Tutaj powinno być reservation.id {{ reservation.id }}</p>
-{% for available_car in available_cars %}
-<p>{{ available_car }}</p>
+<p>Dostępne auta w podanym terminie:</p>
+{{ reservation.id }}
+{% for car in available_cars %}
+<div class="div_cars">
+  <p>Marka: {{ car.car_brand }}</p>
+  <p>Marka: {{ car.car_model }}</p>
+  <p>Marka: {{ car.car_seats }}</p>
+  <a href="{% url 'car_rental:car_detail' car.id %}">Zamów</a>
+</div>
+
 {% endfor %}
 {% endblock %}
 
