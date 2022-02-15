@@ -79,20 +79,30 @@ def available_cars_view(request, reservation_id):
 def car_detail(request, car_id):
     template = 'car_detail.html'
     car = Car.objects.get(id=car_id)
+
+    request.session['car_id'] = car.id
+
     start_date = request.session['start_date']
     end_date = request.session['end_date']
-    id = request.session['reservation_id']
+    reservation_id = request.session['reservation_id']
+    car_id = request.session['car_id']
+    print(f'this is car id {car_id}')
     context = {}
     context['car'] = car
     context['start_date'] = start_date
     context['end_date'] = end_date
-    context['reservation_id'] = id
+    context['reservation_id'] = reservation_id
+    context['car_id'] = car_id
     return render(request, template, context)
 
-# wyrzucić później, niepotrzebne
 def booking_view(request):
-    template = 'reservation'
-    cars = Car.objects.all()
+    start_date = request.session['start_date']
+    end_date = request.session['end_date']
+    car_id = request.session['car_id']
+    car = Car.objects.get(id=car_id)
+    template = 'booking.html'
     context = {}
-    context['cars'] = cars
+    context['start_date'] = start_date
+    context['end_date'] = end_date
+    context['car'] = car
     return render(request, template, context)

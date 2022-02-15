@@ -7,6 +7,7 @@
   <p>{{ car.car_brand }}</p>
   <p>{{ car.car_model }}</p>
   <p>{{ car.car_seats }}</p>
+  <p>testowo car ajdi {{ car.id }}</p>
     <a href="{% url 'car_rental:available_cars' reservation_id %}">Powrót do listy</a>
     <a href="{% url 'car_rental:booking_view' %}">Zamów</a>
 {% endblock %}
