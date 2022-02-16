@@ -10,6 +10,8 @@
   <p>Marka: {{ car.car_seats }}</p>
   <a href="{% url 'car_rental:car_detail' car.id %}">Zamów</a>
 </div>
+ {% empty %}
+ <p>Brak dostępnych samochodów w podanym terminie</p>
 
 {% endfor %}
 {% endblock %}

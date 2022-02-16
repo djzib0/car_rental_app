@@ -100,9 +100,17 @@ def booking_view(request):
     end_date = request.session['end_date']
     car_id = request.session['car_id']
     car = Car.objects.get(id=car_id)
+    booking = Booking()
+    booking.booking_from = start_date
+    booking.booking_to = end_date
+    booking.booked_car = car
+    booking.save()
+
+
     template = 'booking.html'
     context = {}
     context['start_date'] = start_date
     context['end_date'] = end_date
     context['car'] = car
+    context['booking'] = booking
     return render(request, template, context)
