@@ -13,15 +13,6 @@ class ReservationForm(forms.Form):
         ('MAN', 'Manualna'),
     ]
 
-    CATEGORY = [
-        ('SMA', 'Mały'),
-        ('MED', 'Średni'),
-        ('LAR', 'Duży'),
-        ('KOM', 'Kombi'),
-        ('MIN', 'Minivan'),
-        ('SUV', 'SUV'),
-    ]
-
     FUEL = [
         ('GAS', 'Benzyna'),
         ('LPG', 'LPG'),

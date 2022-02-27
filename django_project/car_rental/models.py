@@ -7,19 +7,19 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Car(models.Model):
+    # USUNĄĆ SEATS chyba, że się przyda
+    SEATS = [
+        ('TWO', '2'),
+        ('THR', '3'),
+        ('FOU', '4'),
+        ('FIV', '5'),
+        ('SEV', '7'),
+        ('EIG', '8'),
+    ]
 
     TRANSMISSION = [
         ('AUT', 'Automatyczna'),
         ('MAN', 'Manualna'),
-    ]
-
-    CATEGORY = [
-        ('SMA', 'Mały'),
-        ('MED', 'Średni'),
-        ('LAR', 'Duży'),
-        ('KOM', 'Kombi'),
-        ('MIN', 'Minivan'),
-        ('SUV', 'SUV'),
     ]
 
     FUEL = [
@@ -34,7 +34,7 @@ class Car(models.Model):
     car_registration_number = models.CharField(max_length=10, default='XX 1234')
     car_seats = models.PositiveIntegerField(default=1,
                                             validators=[
-                                                MaxValueValidator(5),
+                                                MaxValueValidator(9),
                                                 MinValueValidator(1)
                                             ]
                                             )
@@ -42,8 +42,6 @@ class Car(models.Model):
     car_transmission = models.CharField(max_length=10, choices=TRANSMISSION, default='MAN')
     car_fuel = models.CharField(max_length=10, choices=FUEL, default='GAS')
     car_price_per_day = models.DecimalField(max_digits=6, decimal_places=2, default=150.01)
-
-
 
     class Meta:
         verbose_name = 'car'
@@ -86,7 +84,6 @@ class Reservation(models.Model):
     car_transmission = models.CharField(max_length=10, choices=TRANSMISSION, default='MAN')
     car_fuel = models.CharField(max_length=10, choices=FUEL, default='GAS')
 
-
     def __str__(self):
         return f'Rezerwacja nr: {self.id}'
 
@@ -109,10 +106,10 @@ class Booking(models.Model):
         verbose_name_plural = 'Bookings'
 
 
-
-class Rent(models.Model):
-    rented_car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    rent_start_date = models.DateField(null=True, blank=True)
-    rent_end_date = models.DateField(null=True, blank=True)
-
-
+# # Niepotrzebny? wyrzucić
+# class Rent(models.Model):
+#     rented_car = models.ForeignKey(Car, on_delete=models.CASCADE)
+#     rent_start_date = models.DateField(null=True, blank=True)
+#     rent_end_date = models.DateField(null=True, blank=True)
+#
+#

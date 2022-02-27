@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p></p>
-<p>Zamówienie {{ booking.id }}</p>
-<p>Zamówiłeś auto {{ car.car_brand }}</p>
+<p>Dziękujemy za złożenie zamówienia.</p>
+<p>Poniżej znajdują się szczegóły Twojego zamówienia.</p>
+<p>Numer zamówienia {{ booking.id }}</p>
+<p>Samochód: {{ car.car_brand }}</p>
+<p>Marka: {{ car.car_model }}</p>
+<p>Termin najmu</p>
+<p>Od: {{ start_date }}</p>
+<p>Do: {{ end_date }}</p>
+<p>Koszt: </p>
 
 {% endblock content %}

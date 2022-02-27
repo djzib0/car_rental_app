@@ -42,8 +42,8 @@ def available_cars_view(request, reservation_id):
             if booking.booked_car.id not in not_available_cars:
                 not_available_cars.append(booking.booked_car.id)
     for car in cars:
-        if car.car_seats != reservation.car_seats:
-            print("car seat jest różne od reservation car_seats")
+        if car.car_seats > reservation.car_seats:
+            print("car seat jest mniejsze od reservation car_seats")
             if car.id not in not_available_cars:
                 not_available_cars.append(car.id)
         elif car.car_transmission != reservation.car_transmission:
@@ -52,8 +52,6 @@ def available_cars_view(request, reservation_id):
         elif car.car_fuel != reservation.car_fuel:
             if car.id not in not_available_cars:
                 not_available_cars.append(car.id)
-
-
 
     # Wyrzucić poniższy kod - działa ten powyższy. Z importu wyrzucić import pandas.
     # for booking in bookings:
@@ -81,55 +79,72 @@ def available_cars_view(request, reservation_id):
     start_date = str(reservation.reservation_from)
     end_date = str(reservation.reservation_to)
 
-    # create sessions for start and end date of reservation
-    request.session['start_date'] = start_date
-    request.session['end_date'] = end_date
-    # request.session['car_seats'] = car_seats
-    # request.session['car_fuel'] = car_fuel
-    # request.session['car_transmission'] = car_transmission
-    request.session['reservation_id'] = reservation.id
+    try:
+        # create sessions for start and end date of reservation
+        request.session['start_date'] = start_date
+        request.session['end_date'] = end_date
+        # request.session['car_seats'] = car_seats
+        # request.session['car_fuel'] = car_fuel
+        # request.session['car_transmission'] = car_transmission
+        request.session['reservation_id'] = reservation.id
 
-    context['available_cars'] = available_cars
-    context['bookings'] = bookings
-    context['reservation'] = reservation
-    return render(request, template, context)
+        context['available_cars'] = available_cars
+        context['bookings'] = bookings
+        context['reservation'] = reservation
+        return render(request, template, context)
+    except:
+        return redirect('car_rental:index')
+
 
 
 def car_detail(request, car_id):
-    template = 'car_detail.html'
-    car = Car.objects.get(id=car_id)
+    try:
+        template = 'car_detail.html'
+        car = Car.objects.get(id=car_id)
 
-    request.session['car_id'] = car.id
+        request.session['car_id'] = car.id
 
-    start_date = request.session['start_date']
-    end_date = request.session['end_date']
-    reservation_id = request.session['reservation_id']
-    car_id = request.session['car_id']
-    print(f'this is car id {car_id}')
-    context = {}
-    context['car'] = car
-    context['start_date'] = start_date
-    context['end_date'] = end_date
-    context['reservation_id'] = reservation_id
-    context['car_id'] = car_id
-    return render(request, template, context)
+        start_date = request.session['start_date']
+        end_date = request.session['end_date']
+        reservation_id = request.session['reservation_id']
+        car_id = request.session['car_id']
+        print(f'this is car id {car_id}')
+        context = {}
+        context['car'] = car
+        context['start_date'] = start_date
+        context['end_date'] = end_date
+        context['reservation_id'] = reservation_id
+        context['car_id'] = car_id
+        return render(request, template, context)
+    except:
+        return redirect('car_rental:index')
+
 
 def booking_view(request):
-    start_date = request.session['start_date']
-    end_date = request.session['end_date']
-    car_id = request.session['car_id']
-    car = Car.objects.get(id=car_id)
-    booking = Booking()
-    booking.booking_from = start_date
-    booking.booking_to = end_date
-    booking.booked_car = car
-    booking.save()
+    try:
+        start_date = request.session['start_date']
+        end_date = request.session['end_date']
+        car_id = request.session['car_id']
+        car = Car.objects.get(id=car_id)
+        bookings = Booking.objects.all()
+        booking = Booking()
+        booking.booking_from = start_date
+        booking.booking_to = end_date
+        booking.booked_car = car
+        booking.save()
+        del request.session['start_date']
+        del request.session['end_date']
+        del request.session['car_id']
 
+        template = 'booking.html'
+        context = {}
+        context['start_date'] = start_date
+        context['end_date'] = end_date
+        context['car'] = car
+        context['booking'] = booking
+        return render(request, template, context)
 
-    template = 'booking.html'
-    context = {}
-    context['start_date'] = start_date
-    context['end_date'] = end_date
-    context['car'] = car
-    context['booking'] = booking
-    return render(request, template, context)
+    except:
+        template = 'empty.html'
+        context = {}
+        return render(request, template, context)
