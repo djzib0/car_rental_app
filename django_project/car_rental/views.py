@@ -16,6 +16,9 @@ def index_view(request, *args, **kwargs):
         if form.is_valid():
             reservation.reservation_from = form.cleaned_data['reservation_from']
             reservation.reservation_to = form.cleaned_data['reservation_to']
+            reservation.car_seats = form.cleaned_data['car_seats']
+            reservation.car_fuel = form.cleaned_data['car_fuel']
+            reservation.car_transmission = form.cleaned_data['car_transmission']
             reservation.save()
             return redirect('car_rental:available_cars', reservation_id=reservation.id)
     template = 'index.html'
@@ -38,6 +41,19 @@ def available_cars_view(request, reservation_id):
                 booking.booking_from <= reservation.reservation_to <= booking.booking_to:
             if booking.booked_car.id not in not_available_cars:
                 not_available_cars.append(booking.booked_car.id)
+    for car in cars:
+        if car.car_seats != reservation.car_seats:
+            print("car seat jest różne od reservation car_seats")
+            if car.id not in not_available_cars:
+                not_available_cars.append(car.id)
+        elif car.car_transmission != reservation.car_transmission:
+            if car.id not in not_available_cars:
+                not_available_cars.append(car.id)
+        elif car.car_fuel != reservation.car_fuel:
+            if car.id not in not_available_cars:
+                not_available_cars.append(car.id)
+
+
 
     # Wyrzucić poniższy kod - działa ten powyższy. Z importu wyrzucić import pandas.
     # for booking in bookings:
@@ -68,6 +84,9 @@ def available_cars_view(request, reservation_id):
     # create sessions for start and end date of reservation
     request.session['start_date'] = start_date
     request.session['end_date'] = end_date
+    # request.session['car_seats'] = car_seats
+    # request.session['car_fuel'] = car_fuel
+    # request.session['car_transmission'] = car_transmission
     request.session['reservation_id'] = reservation.id
 
     context['available_cars'] = available_cars

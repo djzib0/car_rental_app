@@ -7,6 +7,28 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Car(models.Model):
+
+    TRANSMISSION = [
+        ('AUT', 'Automatyczna'),
+        ('MAN', 'Manualna'),
+    ]
+
+    CATEGORY = [
+        ('SMA', 'Mały'),
+        ('MED', 'Średni'),
+        ('LAR', 'Duży'),
+        ('KOM', 'Kombi'),
+        ('MIN', 'Minivan'),
+        ('SUV', 'SUV'),
+    ]
+
+    FUEL = [
+        ('GAS', 'Benzyna'),
+        ('LPG', 'LPG'),
+        ('ELE', 'Elektryczny'),
+
+    ]
+
     car_brand = models.CharField(max_length=30)
     car_model = models.CharField(max_length=30)
     car_registration_number = models.CharField(max_length=10, default='XX 1234')
@@ -16,6 +38,13 @@ class Car(models.Model):
                                                 MinValueValidator(1)
                                             ]
                                             )
+    car_year = models.PositiveIntegerField(default=2010)
+    car_transmission = models.CharField(max_length=10, choices=TRANSMISSION, default='MAN')
+    car_fuel = models.CharField(max_length=10, choices=FUEL, default='GAS')
+    car_price_per_day = models.DecimalField(max_digits=6, decimal_places=2, default=150.01)
+
+
+
     class Meta:
         verbose_name = 'car'
         verbose_name_plural = 'cars'
@@ -25,8 +54,38 @@ class Car(models.Model):
 
 
 class Reservation(models.Model):
+    TRANSMISSION = [
+        ('AUT', 'Automatyczna'),
+        ('MAN', 'Manualna'),
+    ]
+
+    CATEGORY = [
+        ('SMA', 'Mały'),
+        ('MED', 'Średni'),
+        ('LAR', 'Duży'),
+        ('KOM', 'Kombi'),
+        ('MIN', 'Minivan'),
+        ('SUV', 'SUV'),
+    ]
+
+    FUEL = [
+        ('GAS', 'Benzyna'),
+        ('LPG', 'LPG'),
+        ('ELE', 'Elektryczny'),
+    ]
+
     reservation_from = models.DateField(verbose_name='OD')
     reservation_to = models.DateField(verbose_name='DO')
+
+    car_seats = models.PositiveIntegerField(default=1,
+                                            validators=[
+                                                MaxValueValidator(5),
+                                                MinValueValidator(1)
+                                            ]
+                                            )
+    car_transmission = models.CharField(max_length=10, choices=TRANSMISSION, default='MAN')
+    car_fuel = models.CharField(max_length=10, choices=FUEL, default='GAS')
+
 
     def __str__(self):
         return f'Rezerwacja nr: {self.id}'

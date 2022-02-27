@@ -7,7 +7,7 @@
 <div class="div_cars">
   <p>Marka: {{ car.car_brand }}</p>
   <p>Marka: {{ car.car_model }}</p>
-  <p>Marka: {{ car.car_seats }}</p>
+  <p>Ilość miejsc: {{ car.car_seats }}</p>
   <a href="{% url 'car_rental:car_detail' car.id %}">Zamów</a>
 </div>
  {% empty %}
