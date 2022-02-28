@@ -35,7 +35,8 @@ def available_cars_view(request, reservation_id):
     bookings = Booking.objects.all()
     available_cars = []
     not_available_cars = []
-    booked_dates = []
+    rental_days_amount = (reservation.reservation_to - reservation.reservation_from).days
+    print(f'Tyle dni wynajmu: {rental_days_amount}')
     for booking in bookings:
         if booking.booking_from <= reservation.reservation_from <= booking.booking_to or \
                 booking.booking_from <= reservation.reservation_to <= booking.booking_to:
@@ -83,6 +84,7 @@ def available_cars_view(request, reservation_id):
         # create sessions for start and end date of reservation
         request.session['start_date'] = start_date
         request.session['end_date'] = end_date
+        request.session['rental_days_amount'] = rental_days_amount
         # request.session['car_seats'] = car_seats
         # request.session['car_fuel'] = car_fuel
         # request.session['car_transmission'] = car_transmission
@@ -126,22 +128,24 @@ def booking_view(request):
         end_date = request.session['end_date']
         car_id = request.session['car_id']
         car = Car.objects.get(id=car_id)
+        rental_days_amount = request.session['rental_days_amount']
+        rental_days_amount = int(rental_days_amount) * car.car_price_per_day
         bookings = Booking.objects.all()
         booking = Booking()
         booking.booking_from = start_date
         booking.booking_to = end_date
         booking.booked_car = car
         booking.save()
-        del request.session['start_date']
-        del request.session['end_date']
-        del request.session['car_id']
-
         template = 'booking.html'
         context = {}
         context['start_date'] = start_date
         context['end_date'] = end_date
         context['car'] = car
         context['booking'] = booking
+        context['rental_days_amount'] = rental_days_amount
+        del request.session['start_date']
+        del request.session['end_date']
+        del request.session['car_id']
         return render(request, template, context)
 
     except:
