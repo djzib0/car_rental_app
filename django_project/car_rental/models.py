@@ -24,15 +24,16 @@ class Car(models.Model):
 
     FUEL = [
         ('GAS', 'Benzyna'),
+        ('DIE', 'Diesel'),
         ('LPG', 'LPG'),
         ('ELE', 'Elektryczny'),
-
+        ('HYB', 'Hybryda'),
     ]
 
     car_brand = models.CharField(max_length=30)
     car_model = models.CharField(max_length=30)
     car_registration_number = models.CharField(max_length=10, default='XX 1234')
-    car_seats = models.PositiveIntegerField(default=1,
+    car_seats = models.PositiveIntegerField(default=5,
                                             validators=[
                                                 MaxValueValidator(9),
                                                 MinValueValidator(1)
@@ -68,8 +69,10 @@ class Reservation(models.Model):
 
     FUEL = [
         ('GAS', 'Benzyna'),
+        ('DIE', 'Diesel'),
         ('LPG', 'LPG'),
         ('ELE', 'Elektryczny'),
+        ('HYB', 'Hybryda'),
     ]
 
     reservation_from = models.DateField(verbose_name='OD')

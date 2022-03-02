@@ -15,8 +15,10 @@ class ReservationForm(forms.Form):
 
     FUEL = [
         ('GAS', 'Benzyna'),
+        ('DIE', 'Diesel'),
         ('LPG', 'LPG'),
         ('ELE', 'Elektryczny'),
+        ('HYB', 'Hybryda'),
     ]
 
     today = datetime.date.today()
