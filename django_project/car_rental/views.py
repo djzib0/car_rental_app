@@ -34,7 +34,6 @@ def available_cars_view(request, reservation_id):
     available_cars = []
     not_available_cars = []
     rental_days_amount = (reservation.reservation_to - reservation.reservation_from).days
-    print(f'Tyle dni wynajmu: {rental_days_amount}')
     for booking in bookings:
         if booking.booking_from <= reservation.reservation_from <= booking.booking_to or \
                 booking.booking_from <= reservation.reservation_to <= booking.booking_to:

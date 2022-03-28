@@ -37,11 +37,53 @@ body {
   color: white;
 }
 
+.header {
+  background: rgba( 255, 255, 255, 0);
+  width: 250px;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 1px;
+  font-size: 20px;
+}
 .div_cars {
   background: rgba( 255, 255, 255, .1);
   width: 250px;
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
+}
 
+.button1 {
+  background-color: #66d9ff; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
+a {
+   text-decoration:none;
 }

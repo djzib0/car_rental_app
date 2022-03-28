@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Dziękujemy za złożenie zamówienia.</p>
-<p>Poniżej znajdują się szczegóły Twojego zamówienia.</p>
-<p>Numer zamówienia {{ booking.id }}</p>
-<p>Samochód: {{ car.car_brand }}</p>
-<p>Marka: {{ car.car_model }}</p>
-<p>Termin najmu</p>
-<p>Od: {{ start_date }}</p>
-<p>Do: {{ end_date }}</p>
-<p>Koszt: {{ rental_days_amount }}</p>
+<div class="header">
+  <p>Dziękujemy za złożenie zamówienia.</p>
+  <p>Poniżej znajdują się szczegóły Twojego zamówienia.</p>
+</div>
+<div class="div_cars">
+  <p>Numer zamówienia {{ booking.id }}</p>
+  <p>Marka: {{ car.car_brand }}</p>
+  <p>Model: {{ car.car_model }}</p>
+  <p>Rodzaj paliwa: {{ car.get_car_fuel_display }}</p>
+  <p>Termin najmu</p>
+  <p>Od: {{ start_date }}</p>
+  <p>Do: {{ end_date }}</p>
+  <p>Koszt: {{ rental_days_amount }}</p>
+</div>
 
 {% endblock content %}

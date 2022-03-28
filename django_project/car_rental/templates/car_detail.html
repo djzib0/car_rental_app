@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <p>{{ car.car_brand }}</p>
-  <p>{{ car.car_model }}</p>
-  <p>{{ car.car_seats }}</p>
+<div class="div_cars">
+  <p>Wybrany samochód:</p>
+  <p>Marka: {{ car.car_brand }}</p>
+  <p>Model: {{ car.car_model }}</p>
+  <p>Ilość miejsc: {{ car.car_seats }}</p>
+  <p>Rodzaj paliwa: {{ car.get_car_fuel_display }}</p>
+  <p>Cena/dzień: {{ car.car_price_per_day }}</p>
+  <button class="button1">
     <a href="{% url 'car_rental:available_cars' reservation_id %}">Powrót do listy</a>
+  </button>
+  <button class="button1">
     <a href="{% url 'car_rental:booking_view' %}">Zamów</a>
+  </button>
+</div>
 {% endblock %}

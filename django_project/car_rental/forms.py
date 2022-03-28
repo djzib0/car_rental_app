@@ -47,6 +47,28 @@ class ReservationForm(forms.Form):
         car_fuel = cleaned_data.get('car_fuel')
 
 
+# <form method="post" novalidate>
+#   {% csrf_token %}
+#   {{ form.non_field_errors }}
+#   {% for hidden_field in form.hidden_fields %}
+#     {{ hidden_field.errors }}
+#     {{ hidden_field }}
+#   {% endfor %}
+#   <table border="1">
+#     {% for field in form.visible_fields %}
+#       <tr>
+#         <th>{{ field.label_tag }}</th>
+#         <td>
+#           {{ field.errors }}
+#           {{ field }}
+#           {{ field.help_text }}
+#         </td>
+#       </tr>
+#     {% endfor %}
+#   </table>
+#   <button type="submit">Submit</button>
+# </form>
 
-
+# <label for="lname">Last name:</label><br>
+# <input type="text" id="lname" name="lname">
 
