@@ -2,18 +2,18 @@
 
 {% block content %}
 <div class="header">
-  <p>Dziękujemy za złożenie zamówienia.</p>
-  <p>Poniżej znajdują się szczegóły Twojego zamówienia.</p>
+  <p>Thank you for placing an order.</p>
+  <p>Your order details are below.</p>
 </div>
 <div class="div_cars">
-  <p>Numer zamówienia {{ booking.id }}</p>
-  <p>Marka: {{ car.car_brand }}</p>
+  <p>Order number {{ booking.id }}</p>
+  <p>Make: {{ car.car_brand }}</p>
   <p>Model: {{ car.car_model }}</p>
-  <p>Rodzaj paliwa: {{ car.get_car_fuel_display }}</p>
-  <p>Termin najmu</p>
-  <p>Od: {{ start_date }}</p>
-  <p>Do: {{ end_date }}</p>
-  <p>Koszt: {{ rental_days_amount }}</p>
+  <p>Fuel type: {{ car.get_car_fuel_display }}</p>
+  <p>Reservation date</p>
+  <p>From: {{ start_date }}</p>
+  <p>To: {{ end_date }}</p>
+  <p>Price total: {{ rental_days_amount }}</p>
 </div>
 
 {% endblock content %}

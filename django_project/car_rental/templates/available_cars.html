@@ -3,21 +3,21 @@
 {% block content %}
 
 <div class="header">
-  <p>DOSTĘPNE AUTA:</p>
+  <p>AVAILABLE CARS :</p>
 </div>
 {% for car in available_cars %}
 <div class="div_cars">
-  <p>Marka: {{ car.car_brand }}</p>
+  <p>Make: {{ car.car_brand }}</p>
   <p>Model: {{ car.car_model }}</p>
-  <p>Ilość miejsc: {{ car.car_seats }}</p>
-  <p>Rodzaj paliwa: {{ car.get_car_fuel_display }}</p>
-  <p>Cena/dzień: {{ car.car_price_per_day }}</p>
+  <p>Number of seats: {{ car.car_seats }}</p>
+  <p>Fuel type: {{ car.get_car_fuel_display }}</p>
+  <p>Price/day: {{ car.car_price_per_day }}</p>
   <button class="button1">
-      <a href="{% url 'car_rental:car_detail' car.id %}">Zamów</a>
+      <a href="{% url 'car_rental:car_detail' car.id %}">Order</a>
   </button>
 </div>
  {% empty %}
- <p>Brak dostępnych samochodów o podanych parametrach</p>
+ <p>NThere are no available cars that meet your criterias</p>
 {% endfor %}
 
 {% endblock %}
